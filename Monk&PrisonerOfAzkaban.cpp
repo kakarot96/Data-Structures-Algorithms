@@ -1,3 +1,9 @@
+/* https://www.hackerearth.com/practice/data-structures/stacks/basics-of-stacks/practice-problems/algorithm/monk-and-prisoner-of-azkaban */
+
+
+
+
+
 #include<bits/stdc++.h>
 #include <fstream>
 using namespace std;
@@ -11,51 +17,50 @@ y[n-1]=-1;
 
 
     
-    freopen("input.txt","r",stdin);//redirects standard input
-    freopen("output.txt","w",stdout);//redirects standard output
+    // freopen("input.txt","r",stdin);//redirects standard input
+    // freopen("output.txt","w",stdout);//redirects standard output
 for(int i=0;i<n;i++){
     cin>>num[i];
 }
-
-long long int max = -1,max2=-1;
+stack<long long int> s,rs;
+s.push(0);
+rs.push(n-1);
 
 for(int i=1;i<n;i++){
     
-    if(num[i-1]>num[i]){
-        x[i]=i;
-        if(num[i]>max)
-        max=num[i];
+    while(s.empty() == false and num[i]>num[s.top()]){
+       // printf("in while for i= %d",i);
+        y[s.top()] = i+1;
+        s.pop();
     }
-    else{
-        if(num[i]>max){
-            x[i]=-1;
-            max=num[i];
-        }
-        else
-        x[i]=x[i-1];
-    }
- 
+    
+    s.push(i);
 }
-for( int i = n-2 ; i>=0 ; i--){
-    if(num[i+1]>num[i]){
-        y[i]=i+2;
-        if(num[i]>max2)
-        max=num[i];
+//cout<<"Stack is"<<endl;
+while(s.empty() == false){
+    //cout<<num[s.top()]<<" ";
+    y[s.top()] = -1;
+        s.pop();
+}
+
+for(int i = n-2;i>=0;i--){
+  while(rs.empty() == false and num[i]>num[rs.top()]){
+        x[rs.top()] = i+1;
+        rs.pop();
     }
-    else{
-        if(num[i]>max2){
-            y[i]=-1;
-            max2=num[i];
-        }
-        
-        else
-        y[i]=y[i+1];
-    }
+    
+    rs.push(i);
+}
+
+while(rs.empty() == false){
+    //cout<<num[s.top()]<<" ";
+    x[rs.top()] = -1;
+        rs.pop();
 }
 
 cout<<endl;
 for(int i=0;i<n;i++){
-    cout<<x[i]+y[i]<<" ";
+    cout<<x[i]+y[i]<<" "; 
 }
 // cout<<endl;
 // for(int i=0;i<n;i++){
