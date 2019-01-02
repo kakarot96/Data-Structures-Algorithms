@@ -12,10 +12,21 @@
 */
 
 
+/* 
+        Problem Statement:
+        
+        Given a permutation of number from 1 to N. Among all the subarrays, find the number of unique pairs (a,b) such that
+        a!=b and a is maximum and b is second maximum in that subarray.
+        
+        https://www.hackerearth.com/practice/data-structures/stacks/basics-of-stacks/practice-problems/algorithm/little-shino-and-pairs/
+        
+*/
+
+
 #include<bits/stdc++.h>
 #define ll long long int
 using namespace std;
-ll nge[1000005],nee[1000005];
+ll nge[1000005],nee[1000005],arr2[1000005];
 
 void NGE(ll arr[],int n){
     stack<ll> s;
@@ -49,39 +60,53 @@ void NEE(ll arr[],int n){
             s.pop();
     }
 }
-pair<ll,ll> p;
+void increasingOrder(ll arr[],int n){
+    stack<ll> s;
+    s.push(n-1);
+    int count=1;
+   arr2[n-1]=1;
+    for(int i=n-2;i>=0;i--){
+        int count2=0;bool x=true;
+        while(s.empty()==false and arr[i]>arr[s.top()]){
+                x=false;
+                    s.pop();
+                count2++;
+            }
+        if(s.empty())count=1;
+         if(x){
+            count++;
+            arr2[i]=count;
+            s.push(i);
+            continue;
+         }
+         count=count-count2+1;
+         if(count<1)count=1;
+         arr2[i]=count;
+         s.push(i);
+
+    }
+
+}
 int main(){
+    // freopen("input.txt","r",stdin);
+    // freopen("output.txt","w",stdout);
     int n;cin>>n;
     ll arr[n+1];
-    //set< pair<ll,ll> > count;
-    ll count=0;
+    memset(arr2,0,sizeof(arr2));
+    ll count=0;arr2[1000001]=1;
     for(int i=0;i<n;i++)cin>>arr[i];
     int temp[1];arr[n]=-1;
     NGE(arr,n);
     NEE(arr,n);
+    increasingOrder(arr,n);
+    int tempCount=0;
     
     for(int i=0;i<n-1;i++){
-        int idx = i+1;
-        while(idx<=nge[i]){
-            if(idx!=1000001)
-            count++;
-            if(idx>=nge[i])break;
-           // cout<<"IN THE WHILE "<<i<<" "<<idx<<endl;
-            
-            
-            idx = nee[idx];
-        }
-        // for(int j=i+1;j<=nge[i];j++){
-        //     if( arr[j] >= arr[idx]){
-        //         p = make_pair(max(arr[i],arr[j]),min(arr[i],arr[j]));
-        //         count++;
-        //         idx=j;
-        //     }
-        // }clear
-
+        count+=arr2[i+1]- arr2[nge[i]] + 1;
+  
     }
-   
-   // cout<<endl;
+
     cout<<count<<endl;
+    
  
 }

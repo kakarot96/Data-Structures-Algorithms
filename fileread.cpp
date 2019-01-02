@@ -1,16 +1,15 @@
-#include <iostream>
-#include <fstream>
-int main(int argc, char * argv[])
+#include<bits/stdc++.h>
+using namespace std;
+int main()
 {
-    std::fstream myfile("input.txt", std::ios_base::in);
-
-    long long a;
-    while (myfile >> a)
-    {
-        printf("%lld ", a);
-    }
-
+    //freopen("input.txt","r",stdin);
+    long long arr[1000001];
+int n,count=0;cin>>n;
+for(int i=0;i<n;i++){
+    cin>>arr[i];
+    if(arr[i]==arr[i-1])count++;
+}
     //getchar();
-
+cout<<count<<" "<<n<<endl;
     return 0;
 }
