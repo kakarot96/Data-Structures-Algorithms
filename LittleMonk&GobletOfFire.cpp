@@ -1,3 +1,9 @@
+/*
+    Problem Statement:
+    
+    https://www.hackerearth.com/practice/data-structures/queues/basics-of-queues/practice-problems/algorithm/little-monk-and-goblet-of-fire/
+
+*/
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long;
