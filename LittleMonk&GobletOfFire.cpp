@@ -4,62 +4,89 @@ using namespace std;
 int main()
 {   int q;cin>>q;
     char c;
-    queue< pair<int,int> > fir;
-    queue< pair<int,int> > sec;
-    queue< pair<int,int> > third;
-    queue< pair<int,int> > fourth;
+    
+    queue< int > queues[4];
+    int status[4]={0},f=-1,s=-1,t=-1,fo=-1;
+    bool flag[4]={0};
+    queue<int> zz;
+    
     int count=0;
     while(q--){
         cin>>c;
         if(c=='P'){
-            cout<<"First"<<endl;
-            while(fir.empty()==false){
-                cout<<fir.front().first<<" ";
-                fir.pop();
-            }
-            cout<<endl;
-            cout<<"Second"<<endl;
-            while(sec.empty()==false){
-                cout<<sec.front().first<<" ";
-                sec.pop();
-            }
-            cout<<endl;
+            int v=zz.front();zz.pop();
+            int b=zz.front();zz.pop();
+            int n=zz.front();zz.pop();
+            int m =zz.front();zz.pop();
+            cout<<v<<" "<<b<<" "<<n<<" "<<m<<endl;
+            if(v>0)zz.push(v);if(b>0)zz.push(b);if(n>0)zz.push(n);if(m>0)zz.push(m);
         }
         if(c=='D'){
-            cout<<"in D"<<endl;
-            cout<<fir.front().second<<" "<<sec.front().second<<"  "<<third.front().second<<"  "<<fourth.front().second<<endl;
-            if(fir.empty()==false and fir.front().second<sec.front().second and fir.front().second<third.front().second and fir.front().second<fourth.front().second){
-                cout<<1<<" "<<fir.front().first;
-                fir.pop();
+            //cout<<"in D"<<endl;
+            
+            cout<<zz.front()<<" "<<queues[zz.front()-1].front()<<endl;
+            queues[zz.front()-1].pop();
+            if(queues[zz.front()-1].empty()){
+                // int temp=f;
+                // f=s;s=t;t=fo;fo=temp;
+                status[zz.front()-1]=0;
+                zz.pop();
+                if(zz.size()==1){
+                    flag[1]=0;flag[2]=0;flag[3]=0;
+                }
+                else if(zz.size()==2){
+                    flag[2]=0;flag[3]=0;
+                }
+                else if(zz.size()==3)flag[3]=false;
+                else{
+                    flag[1]=0;flag[2]=0;flag[3]=0;flag[0]=0;
+                }
+                
+                
             }
-            else if(sec.empty()==false and sec.front().second<fir.front().second and sec.front().second<third.front().second and sec.front().second<fourth.front().second){
-                cout<<2<<" "<<sec.front().first;
-                sec.pop();
-            }
-            else if(third.empty()==false and third.front().second<sec.front().second and third.front().second<fir.front().second and third.front().second<fourth.front().second){
-                cout<<3<<" "<<third.front().first;
-                third.pop();
-            }
-            else if(fourth.empty()==false and fourth.front().second<sec.front().second and fourth.front().second<third.front().second and fourth.front().second<fir.front().second){
-                cout<<4<<" "<<fourth.front().first;
-                fourth.pop();
-            }
+            
         }
         if(c=='E'){
             count++;
-            int roll;cin>>roll;
             int sch;cin>>sch;
-            
-            switch(sch){
-                case 1: fir.push(make_pair(roll,count));
-                break;
-                case 2: sec.push(make_pair(roll,count));
-                break;
-                case 3: third.push(make_pair(roll,count));
-                break;
-                case 4: fourth.push(make_pair(roll,count));
-                break;
+            int roll;cin>>roll;
+            if(flag[0]==false){
+                f=sch;
+                zz.push(sch);
+                status[sch-1]=1;
+                
+                flag[0]=true;
             }
+            else if(flag[1]==false){
+                if(status[sch-1]==0){
+                s=sch;
+                zz.push(sch);
+                status[sch-1]=2;
+                
+                flag[1]=true;
+                }
+                
+            }
+            else if(flag[2]==false){
+                if(status[sch-1]==0){
+                t=sch;
+                zz.push(sch);
+                status[sch-1]=3;
+                
+                flag[2]=true;
+                }
+            }
+            else if(flag[3]==false){
+                if(status[sch-1]==0){
+                fo=sch;
+                zz.push(sch);
+                status[sch-1]=4;
+                
+                flag[3]=true;}
+            }
+            
+           queues[sch-1].push(roll); 
+    
         }
     }
   
