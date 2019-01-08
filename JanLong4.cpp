@@ -10,6 +10,10 @@ int main(){
         
         long int g1=p-n;
         long int g2=p-ans;
+        if(ans==0){
+            cout<<pow(p,3)<<endl;
+            continue;
+        }
         int count = g1*g1 + g1*g2 + g2*g2;
          cout<<count<<endl;
         
