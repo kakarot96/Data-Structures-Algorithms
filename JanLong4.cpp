@@ -1,3 +1,10 @@
+/*
+    Problem Statement:
+    Chef is playing a game with two of his friends. In this game, each player chooses an integer between 1 and P inclusive. Let's denote the integers chosen by Chef, 
+    friend 1 and friend 2 by i, j and k respectively; then, Chef's score is (((N mod i) mod j) mod k) mod N.
+    Chef wants to obtain the maximum possible score. Let's denote this maximum score by M. Find the number of ways to choose the triple (i,j,k) so that Chef's score is equal to M.
+*/
+
 #include<bits/stdc++.h>
 using namespace std;
 int main(){
