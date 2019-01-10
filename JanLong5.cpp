@@ -1,3 +1,15 @@
+/*
+    Problem Statement:
+    You are given an empty grid with N rows (numbered 1 through N) and M columns (numbered 1 through M).
+    You should fill this grid with integers in a way that satisfies the following rules:
+    For any three cells c1, c2 and c3 such that c1 shares a side with c2 and another side with c3, the 
+    integers written in cells c2 and c3 are distinct.
+    Let's denote the number of different integers in the grid by K; then, each of these integers should lie 
+    between 1 and Kinclusive. K should be minimum possible.
+    Find the minimum value of K and a resulting (filled) grid. If there are multiple solutions, you may find
+    any one.
+    https://www.codechef.com/JAN19B/problems/DIFNEIGH
+*/
 #include<bits/stdc++.h>
 using namespace std;
 int main(int argc, char const *argv[])
