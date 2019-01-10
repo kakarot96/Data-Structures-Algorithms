@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 int main(){
-    freopen("output.txt","w",stdout);
+    // freopen("output.txt","w",stdout);
     bool primes[5000000]; int prime[50000];int count=0;
     memset(primes,true,sizeof(primes));
      
@@ -14,14 +14,16 @@ int main(){
              }
          }
      }
-     cout<<prime[25000]<<endl;;
+    //  cout<<prime[25000]<<endl;;
     // for(int i=0;i<20;i++)
     // {
     //     cout<<prime[i]<<endl;
     // }
     int t;scanf("%d",&t);
+    //  cout<<t<<endl;
     while(t--){
         int n;cin>>n; int ans[n];
+        // cout<<n<<endl;
         ans[0]=6;ans[1]=10;
         int c2=1,c3=2;
         for(int i=0;i<n-2;i++){
@@ -47,12 +49,14 @@ int main(){
             ans[0]*=prime[c2+1];
         }
         if(n%4==1 and n>3){
-            ans[n-2]=3*prime[c3];c3++;
-            ans[n-1]=prime[c2];ans[0]*=prime[c2];
+            ans[n-2]=3*prime[c3];
+            if (c2 == c3) c2++;
+            ans[n-1]=prime[c2]*prime[c3];ans[0]*=prime[c2];
         }
          if(n%4==3 and n>3){
-            ans[n-2]=2*prime[c2];c2++;
-            ans[n-1]=prime[c3];ans[0]*=prime[c3];
+            ans[n-2]=2*prime[c2];
+            if (c2 == c3) c3++;
+            ans[n-1]=prime[c2]*prime[c3];ans[0]*=prime[c3];
         }
         
         for(int i=0;i<n;i++){
@@ -60,13 +64,6 @@ int main(){
         }
         
         cout<<endl;
-        cout<<c2<<" "<<c3<<endl;
-        sort(ans,ans+n);bool temp=true;
-        for(int i=0;i<n-1;i++){
-            if(ans[i]==ans[i+1]){
-                temp=false;break;
-            }
-        }
-        cout<<temp<<endl;
+        
     }
 }
