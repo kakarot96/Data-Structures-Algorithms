@@ -1,44 +1,34 @@
 #include "bits/stdc++.h"
 #define ll long long int;
 using namespace std;
+
+typedef pair< int, pair< int, int > > pi;
 bool sortbysec(const pair<long int,long int> &a, 
               const pair<long int,long int> &b) 
 { 
     return (a.second < b.second); 
 }
-// struct compare
-// {
-//     bool operator()(pair<long int, long int> p1,pair<long int,long int> p2) {
-//         if(p1.second == p2.second)
-//             return p1.first > p2.first;
-//         else 
-//             return p1.second > p2.second;    // ***EDIT***
-//     }
-// };
+
 
 int main()
-{   vector< pair<long int,long int> >vq;
-    //priority_queue< pair<long int,long int>,vector< pair< long int,long int > >,compare > pq;
-    // pq.push(make_pair(1,10));
-    // pq.push(make_pair(5,10));
-    // pq.push(make_pair(7,7));
-    // pq.push(make_pair(9,7));
-    //     pq.push(make_pair(2,8));
-    // pq.push(make_pair(10,8
-    vq.push(make_pair(1,10));
-    vq.push(make_pair(5,10));
-    vq.push(make_pair(7,7));
-    vq.push(make_pair(9,7));
-    vq.push(make_pair(2,8));
-    vq.push(make_pair(10,8));
-    sort(vect.begin(), vect.end(), sortbysec); 
+{   int h,c,q;cin>>h>>c>>q;
+    priority_queue< pi , vector< pi >, greater<pi> >pq;//vector< pair< long int,long int > >,compare > pq;
+    for(int i=0;i<c;i++){
+        int st,et,hgt;cin>>st>>et>>hgt;
+        pq.push(make_pair(st,make_pair(hgt,0)));
+        pq.push(make_pair(et,make_pair(hgt,1)));
+        
+    }
 
-int q;cin>>q;
-while(q--){
-   long int num;cin>>num;
-    cout<<lower_bound(vq.begin(),vq.end(),num)<<endl;
+    while(!pq.empty()){
+        cout<<pq.top().first<<" "<<pq.top().second.first<<" "<<pq.top().second.second<<endl;
+        pq.pop();
+    }
+// while(q--){
+//    long int num;cin>>num;
+//     cout<<lower_bound(vq.begin(),vq.end(),num)<<endl;
     
-}
+// }
 
     // while(!pq.empty())
     // {
