@@ -58,12 +58,12 @@ int main(){
             if (c2 == c3) c3++;
             ans[n-1]=prime[c2]*prime[c3];ans[0]*=prime[c3];
         }
-        
+     
         for(int i=0;i<n;i++){
             cout<<ans[i]<<" ";
         }
         
         cout<<endl;
-        
-    }
+    
+        }
 }
