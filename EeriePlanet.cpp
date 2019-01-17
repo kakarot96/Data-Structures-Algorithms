@@ -1,25 +1,69 @@
+/*
+    PROBLEM STATEMENT:
+    You own a club on eerie planet. The day on this planet comprises of H hours. You appointed C crew members to handle the huge crowd that you get, being the best club on the planet. Each member of 
+    the crew has fixed number of duty hours to work. There can be multiple or no crew members at work at any given hour of the day.
+    Being on weird planet, the rules of this club cannot be normal. Each member of the crew only allows people who are taller than him to enter the club when he is at work.
+    Given the schedule of work and heights of the crew members, you have to answer Q queries. Each query specifies the time of entry and height of a person who is visiting the club. You have to answer
+    if the person will be allowed to enter the club or not.
+*/
 #include "bits/stdc++.h"
 #define ll long long int;
 using namespace std;
+<<<<<<< HEAD
 
 typedef pair< int, pair< int, int > > pi;
 bool sortbysec(const pair<long int,long int> &a, 
               const pair<long int,long int> &b) 
+=======
+typedef pair< int, pair< int, int> > pp;
+struct CompareHeight { 
+    bool operator()( pp const& p1, pp const& p2) 
+    { 
+        if(p1.first<p2.first || (p1.first==p2.first and p1.second.first>p2.second.first) || (p1.first==p2.first and p1.second.first==p2.second.first and p1.second.second<p2.second.second))
+        return false;
+        return true;
+    } 
+};
+
+struct Compare { 
+    bool operator()( pair<int , int> const& p1, pair<int , int> const& p2) 
+    { 
+        if(p1.first<p2.first)
+    return false;
+    return true;
+    } 
+};
+
+bool sortbysec(const pair< int, int> &a, 
+              const pair< int, int> &b) 
+>>>>>>> 0cc51d7dc865800880ff81c1fe83c207e69530ca
 { 
-    return (a.second < b.second); 
+    return (a.first < b.first); 
 }
 
 
 int main()
+<<<<<<< HEAD
 {   int h,c,q;cin>>h>>c>>q;
     priority_queue< pi , vector< pi >, greater<pi> >pq;//vector< pair< long int,long int > >,compare > pq;
     for(int i=0;i<c;i++){
         int st,et,hgt;cin>>st>>et>>hgt;
+=======
+{   freopen("input.txt","r",stdin);
+    freopen("output.txt","w",stdout);
+    int h,c,q;cin>>h>>c>>q;
+    priority_queue< pp, vector< pp >, CompareHeight> pq;
+    
+    for(int i=0;i<c;i++){
+        int st,et,hgt;
+        cin>>hgt>>st>>et;
+>>>>>>> 0cc51d7dc865800880ff81c1fe83c207e69530ca
         pq.push(make_pair(st,make_pair(hgt,0)));
         pq.push(make_pair(et,make_pair(hgt,1)));
         
     }
 
+<<<<<<< HEAD
     while(!pq.empty()){
         cout<<pq.top().first<<" "<<pq.top().second.first<<" "<<pq.top().second.second<<endl;
         pq.pop();
@@ -29,12 +73,64 @@ int main()
 //     cout<<lower_bound(vq.begin(),vq.end(),num)<<endl;
     
 // }
+=======
+    multiset<int, greater <int> > maxHeight;
+    multiset <int> :: iterator itr; 
 
-    // while(!pq.empty())
-    // {
-    //     pair<int, int> w = pq.top();
-    //     vq.push_back(w);
-    //     cout << w.first << " " << w.second << endl;;
-    //     pq.pop();
-    // }
+    vector< pair< int , int > > val,numActive;
+    int maxH=-1,active=0;
+    while(!pq.empty()){
+         pp top = pq.top();
+        if(top.second.second==0){
+          // cout<<"Line Start with height "<<top.second.first<<endl;
+          if(maxHeight.empty() || top.second.first>*maxHeight.begin()){
+              val.push_back(make_pair(top.first,top.second.first));
+              //numActive.push_back(make_pair(top.first,++active));
+              
+          } 
+          else{
+              val.push_back(make_pair(top.first,*maxHeight.begin()));
+              }
+              active++;
+          numActive.push_back(make_pair(top.first,active));
+          maxHeight.insert(top.second.first);
+        }
+        else{
+            
+            int temp = *maxHeight.begin(); 
+            //cout<<"Line End with height "<<temp<<endl;
+            val.push_back(make_pair(top.first,temp));
+             numActive.push_back(make_pair(top.first,--active));
+             itr = maxHeight.find(top.second.first);
+            maxHeight.erase(itr);
+        }
+       // cout<<top.first<<" "<<top.second.first<<" "<<top.second.second<<endl;
+         pq.pop();
+    }
+    
+    while(q--){
+        int h,t;cin>>h>>t;
+        
+        if((*(--lower_bound(numActive.begin(),numActive.end(),make_pair(t,0), sortbysec))).second<=0 and (*lower_bound(numActive.begin(),numActive.end(),make_pair(t,0), sortbysec)).first>t){
+          cout<<"YES"<<endl;
+          continue;
+            }
+        
+        int ans = (*lower_bound(val.begin(),val.end(),make_pair(t,0), sortbysec)).second;
+        int ans2 = (*(--lower_bound(val.begin(),val.end(),make_pair(t,0), sortbysec))).second;
+        
+        
+       // cout<<ans<<"  "<<ans2<<endl;
+        if((*(--lower_bound(numActive.begin(),numActive.end(),make_pair(t,0), sortbysec))).second>0 and (*lower_bound(val.begin(),val.end(),make_pair(t,0), sortbysec)).first>t){
+            if(ans2>=h)cout<<"NO"<<endl;
+        else cout<<"YES"<<endl;
+        continue;
+        }
+        if(ans>=h)cout<<"NO"<<endl;
+        else cout<<"YES"<<endl;
+>>>>>>> 0cc51d7dc865800880ff81c1fe83c207e69530ca
+
+    }
+    
+    
 }

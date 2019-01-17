@@ -46,36 +46,44 @@ int main(){
         // itr=done.find(10);
         // cout<<*itr<<endl;
         
-        
+        int its=0;
      for(int i=0;i<n;i++){
          int flag2=0,idx=-1;
+         
          for(int j=0;j<50000;j++){
             if(prime[j]==b){
               idx=j;
              break;
          }  
          }
-        
-         for(int j=0;j<arr[idx].size();j++){
+        int size=arr[idx].size();
+         for(int j=0;j<size;j++){
+             
              if(arr[idx][j]%a!=0){
-                 
+                 cout<<"its "<<its<<endl;
                  
                  for(int l=0;l<50000;l++){
+                     its++;
                      bool x= done.find(arr[idx][j]) != done.end();
+                     cout<<"x "<<x<<" "<<i<<endl;
                      if(prime[l]!=a and prime[l]!=b and arr[idx][j]%prime[l]==0 and !x)
-                     {  cout<<arr[idx][j]<<" ";
+                     { // cout<<arr[idx][j]<<" ";
                          done.insert(arr[idx][j]);
                          a=b;
                          b=prime[l];
                          flag2=1;
                          break;
                      }
+                     cout<<"i-->"<<i<<"  j-->"<<j<<endl;
                  }
+                 if(flag2==1)break;
              }
-             if(flag2)break;
+            if(flag2==1)break; 
          }
+         cout<<"its "<<its<<endl;
      }
-     
+     cout<<endl;
+     cout<<its<<endl;
     // freopen("output2.txt","w",stdout);
     // for(int i=0;i<100;i++){
     //     for(int j=0;j<arr[i].size();j++){
