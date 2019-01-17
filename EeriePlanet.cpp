@@ -9,12 +9,6 @@
 #include "bits/stdc++.h"
 #define ll long long int;
 using namespace std;
-<<<<<<< HEAD
-
-typedef pair< int, pair< int, int > > pi;
-bool sortbysec(const pair<long int,long int> &a, 
-              const pair<long int,long int> &b) 
-=======
 typedef pair< int, pair< int, int> > pp;
 struct CompareHeight { 
     bool operator()( pp const& p1, pp const& p2) 
@@ -36,19 +30,12 @@ struct Compare {
 
 bool sortbysec(const pair< int, int> &a, 
               const pair< int, int> &b) 
->>>>>>> 0cc51d7dc865800880ff81c1fe83c207e69530ca
 { 
     return (a.first < b.first); 
 }
 
 
 int main()
-<<<<<<< HEAD
-{   int h,c,q;cin>>h>>c>>q;
-    priority_queue< pi , vector< pi >, greater<pi> >pq;//vector< pair< long int,long int > >,compare > pq;
-    for(int i=0;i<c;i++){
-        int st,et,hgt;cin>>st>>et>>hgt;
-=======
 {   freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
     int h,c,q;cin>>h>>c>>q;
@@ -57,23 +44,11 @@ int main()
     for(int i=0;i<c;i++){
         int st,et,hgt;
         cin>>hgt>>st>>et;
->>>>>>> 0cc51d7dc865800880ff81c1fe83c207e69530ca
         pq.push(make_pair(st,make_pair(hgt,0)));
         pq.push(make_pair(et,make_pair(hgt,1)));
         
     }
 
-<<<<<<< HEAD
-    while(!pq.empty()){
-        cout<<pq.top().first<<" "<<pq.top().second.first<<" "<<pq.top().second.second<<endl;
-        pq.pop();
-    }
-// while(q--){
-//    long int num;cin>>num;
-//     cout<<lower_bound(vq.begin(),vq.end(),num)<<endl;
-    
-// }
-=======
     multiset<int, greater <int> > maxHeight;
     multiset <int> :: iterator itr; 
 
@@ -128,7 +103,6 @@ int main()
         }
         if(ans>=h)cout<<"NO"<<endl;
         else cout<<"YES"<<endl;
->>>>>>> 0cc51d7dc865800880ff81c1fe83c207e69530ca
 
     }
     
